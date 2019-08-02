@@ -1,0 +1,31 @@
+<div>
+  <app-nav-bar (newNote)="addNote()"></app-nav-bar>
+  <!-- <app-note-edit *ngIf="isEditing" (save)="onSave()" (discard)="onDiscard()"></app-note-edit> -->
+  <div class="row">
+    <div class="input-field col l12">
+      <i class="material-icons prefix">search</i>
+      <input id="search" [(ngModel)]="filterInput" type="text" class="" placeholder="Search...">
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  <ul class="collection" *ngFor="let note of notes | filter :filterInput :'content'">
+    <li class="collection-item row">
+      <div class="col l10">
+        <div class="row">
+          <span class="title">Created on {{note.createdDate | date :'dd MMM'}}</span>
+        </div>
+        <p>Content: {{note.content}}</p>
+      </div>
+      <div class="col l2">
+        <a class="btn-floating red" [routerLink]="[note.id]">
+          <i class="material-icons">mode_edit</i>
+        </a>
+        <a class="btn-floating red" (click)="onDelete(note.id)">
+          <i class="material-icons">delete</i>
+        </a>
+      </div>
+    </li>
+  </ul>
+  <button class="btn" (click)="saveData()">Save</button>
+  <button class="btn" (click)="findData()">Load</button>
+</div>
