@@ -3,7 +3,7 @@
 <ng-template appPlaceholder></ng-template>
 
 <h2>{{ signUpMode == true ? 'Register' : 'Log in' }}</h2>
-<div class="row" [ngStyle]="{'text-align': center}">
+<div class="row" [ngStyle]="{'text-align': 'center'}">
   <div class="col s12 m12 l12" >
     <form *ngIf="!isLoading" (ngSubmit)="authenticate(authForm)" #authForm="ngForm">
       <div class="input-field">
