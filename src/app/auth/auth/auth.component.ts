@@ -26,11 +26,18 @@ export class AuthComponent implements OnInit, OnDestroy {
     // this.errorSubscription = this.authService.error.subscribe(error => this.showAlertModal(error.message));
     this.errorSubscription = this.store.select('auth').subscribe(authState => {
       this.isLoading = authState.isLoading;
-      if(authState.errorMessage) {
+      if (authState.errorMessage) {
         // console.log(authState.errorMessage);
-        
+
       }
     })
+
+    if (Stitch.defaultAppClient.auth.hasRedirectResult()) {
+      Stitch.defaultAppClient.auth.handleRedirectResult().then(user => {
+        // console.log(user);
+        this.store.dispatch(new AuthActions.Signedin(user))
+      });
+    }
   }
 
   // closeAlert() {
@@ -44,10 +51,10 @@ export class AuthComponent implements OnInit, OnDestroy {
   authenticate(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    if(this.signUpMode) {
-      this.store.dispatch(new AuthActions.SignupStart({email: email, password: password}))
-    }else {
-      this.store.dispatch(new AuthActions.SigninStart({email: email, password: password}))
+    if (this.signUpMode) {
+      this.store.dispatch(new AuthActions.SignupStart({ email: email, password: password }))
+    } else {
+      this.store.dispatch(new AuthActions.SigninStart({ email: email, password: password }))
     }
   }
 
