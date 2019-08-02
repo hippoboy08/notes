@@ -1,18 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NotesModule } from './notes/notes.module';
+
+import { appReducers } from "./store/app.reducers";
+import { environment } from 'src/environments/environment';
+import { CommonModule } from '@angular/common';
+import { AuthModule } from './auth/auth.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from "./auth/store/auth.effects";
+import { NotesEffects } from './notes/store/notes.effects';
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    CommonModule,
+    NotesModule,
+    AuthModule,
+    AppRoutingModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([AuthEffects, NotesEffects]),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production
+    }),
+
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
