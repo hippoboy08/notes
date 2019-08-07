@@ -5,7 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromApp from "../../store/app.reducers";
 import * as AuthActions from "../store/auth.actions";
-import { FacebookRedirectCredential, Stitch } from 'mongodb-stitch-browser-sdk';
+import { FacebookRedirectCredential, Stitch, GoogleRedirectCredential } from 'mongodb-stitch-browser-sdk';
 
 @Component({
   selector: 'app-auth',
@@ -60,6 +60,11 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   loginWithFB() {
     const credential = new FacebookRedirectCredential();
+    Stitch.defaultAppClient.auth.loginWithRedirect(credential);
+  }
+
+  loginWithGG() {
+    const credential = new GoogleRedirectCredential();
     Stitch.defaultAppClient.auth.loginWithRedirect(credential);
   }
 
