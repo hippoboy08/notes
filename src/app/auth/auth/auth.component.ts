@@ -10,12 +10,12 @@ import { FacebookRedirectCredential, Stitch, GoogleRedirectCredential } from 'mo
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit, OnDestroy {
   signUpMode: boolean = false;
   isLoading: boolean;
-  // error: string = null;
+  error: string = null;
   errorSubscription: Subscription;
   closeSubscription: Subscription;
 
@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.isLoading = authState.isLoading;
       if (authState.errorMessage) {
         // console.log(authState.errorMessage);
-
+        this.error = authState.errorMessage
       }
     })
 
@@ -40,9 +40,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
   }
 
-  // closeAlert() {
-  //   this.error = null;
-  // }
+  closeAlert() {
+    this.error = null;
+  }
 
   toggleMode() {
     this.signUpMode = !this.signUpMode;

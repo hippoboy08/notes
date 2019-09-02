@@ -1,10 +1,8 @@
-<!-- This template-driven method is now replaced by the imperative method
-  <app-alert *ngIf="error" (close)="closeAlert()" [message]="error"></app-alert> -->
-<ng-template appPlaceholder></ng-template>
+<app-alert *ngIf="error" (close)="closeAlert()" [message]="error"></app-alert>
 
 <h2>{{ signUpMode == true ? 'Register' : 'Log in' }}</h2>
 <div class="row" [ngStyle]="{'text-align': 'center'}">
-  <div class="col s12 m12 l12" >
+  <div class="col s12 m12 l12">
     <form *ngIf="!isLoading" (ngSubmit)="authenticate(authForm)" #authForm="ngForm">
       <div class="input-field">
         <label for="email">Email</label>

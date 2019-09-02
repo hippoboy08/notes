@@ -26,7 +26,11 @@ export interface AuthResponseData {
 //   return new AuthActions.Signedin()
 // };
 const handleError = (message: string) => {
-  return of(new AuthActions.AuthFailed(message));
+  return of(new AuthActions.AuthFailed(toCamelCase(message)));
+};
+
+const toCamelCase = function(string: string) {
+  return string.substring(0, 1).toUpperCase() + string.substring(1);
 };
 
 @Injectable()
@@ -45,7 +49,7 @@ export class AuthEffects {
           }),
           catchError(errorResponse => {
             // console.log('Auth Effect Error Log:', errorResponse);
-            Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory).resendConfirmationEmail(requestData.payload.email)
+            // Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory).resendConfirmationEmail(requestData.payload.email)
             return handleError(errorResponse.message);
           })
         )
@@ -64,7 +68,7 @@ export class AuthEffects {
             return new AuthActions.Signedin(response)
           }),
           catchError(errorResponse => {
-            // console.log('Auth Effect Log:', errorResponse);
+            // console.log('[Auth Effect] Sign in FAILED Log:', errorResponse);
             return handleError(errorResponse.message);
           })
         )
