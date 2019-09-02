@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -69,6 +69,11 @@ export class NoteEditComponent implements OnInit {
     this.store.dispatch(new NoteActions.EditNoteStop());
     this.location.back()
     this.discard.emit();
+  }
+
+  @HostListener('document:keyup.escape', ['$event'])
+  triggerDiscard() {
+    this.onDiscard()
   }
 
 }
