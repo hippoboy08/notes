@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { AuthConfirmComponent } from './auth-confirm/auth-confirm.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AuthConfirmComponent } from './auth-confirm/auth-confirm.component';
   imports: [ 
     CommonModule,
     FormsModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    SharedModule
   ]
 })
 export class AuthModule {}

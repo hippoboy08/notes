@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from "./auth/store/auth.effects";
 import { NotesEffects } from './notes/store/notes.effects';
 import { AuthGuard } from './auth/auth-guard.service';
+import { NegateAuthGuard } from './auth/auth-guard-negate.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AuthGuard } from './auth/auth-guard.service';
     }),
 
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, NegateAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
