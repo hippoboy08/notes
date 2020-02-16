@@ -1,0 +1,40 @@
+/** SECTION Variables */
+@import "../../styles/variables.scss";
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 2;
+}
+
+.alert-box {
+  position: fixed;
+  top: 30vh;
+  left: 35vw;
+  width: 30vw;
+  padding: 16px;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid $primary-color;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  h2 {
+    color: $primary-color;
+  }
+  a {
+    margin: 0.5rem;
+  }
+  a:hover{
+    box-shadow: 0 2px 8px $primary-color;
+    overflow: hidden;
+    animation: none;
+    -webkit-animation: none;
+  }
+}
+
+.btn-floating {
+  background-color: $primary-color;
+}

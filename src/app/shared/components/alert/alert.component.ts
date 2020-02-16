@@ -3,15 +3,23 @@ import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@a
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css']
+  styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
+  @Input() title: string = null;
   @Input() message: string = null;
+  @Input() enableCheck: boolean = false;
   @Output() close = new EventEmitter<void>();
+  @Output() check = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit() {
   }
+
+  checkModal() {
+    this.check.emit();
+  }
+
 
   closeModal() {
     this.close.emit();
