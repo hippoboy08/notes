@@ -1,9 +1,13 @@
-
 #wrap {
+  height: auto;
+  // width: 50vw;
   text-align:center; 
   margin: auto; 
-  border: solid black 1px;
+  // border: solid black 1px;
+  background-color: rgba(30, 30, 30, 0.9);
+  color: white;
   @media (min-width: 500px) {
-    width: 30vw;
+    // width: 30vw;
+    height: 100vh;
   }
 }
