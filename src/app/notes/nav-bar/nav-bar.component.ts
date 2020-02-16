@@ -12,7 +12,7 @@ import * as AuthActions from '../../auth/store/auth.actions';
 })
 export class NavBarComponent implements OnInit {
   @Output() newNote = new EventEmitter<any>();
-  @ViewChild('dropdown', {static: false}) btn: ElementRef;
+  @ViewChild('dropdown', { static: false }) dropdown: ElementRef;
   user: string;
 
   constructor(private store: Store<fromApp.AppState>) { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -9,6 +9,8 @@ import * as fromApp from '../../store/app.reducers';
 import * as NoteActions from '../store/notes.actions';
 import { Note } from 'src/app/shared/models/note.model';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
+
+declare let marked: any;
 
 @Component({
   selector: 'app-note-edit',
@@ -48,7 +50,13 @@ export class NoteEditComponent implements OnInit {
       'user': new FormControl(Stitch.defaultAppClient.auth.user.id || this.note.user),
       'content': new FormControl(this.note.content),
       'createdDate': new FormControl(this.note.createdDate),
+      'isShared': new FormControl(this.note.isShared),
     });
+  }
+
+  /* Render markdown text to HTML */
+  renderPreview(content: string) {
+    return marked(content);
   }
 
   onSave() {
@@ -61,7 +69,12 @@ export class NoteEditComponent implements OnInit {
       this.store.dispatch(new NoteActions.UpdateNote({...this.note, createdDate: new Date()}));
     }
     this.store.dispatch(new NoteActions.EditNoteStop());
-    this.location.back()
+    // /** NOTE come back to the list when the action 
+    //  * is done to prevent duplicating newly added note */
+    // this.store.select('notes').subscribe(notesState => {
+    //   if(notesState.isLoading == false)
+    // })
+    // this.location.back()
     this.save.emit();
   }
 
@@ -75,5 +88,4 @@ export class NoteEditComponent implements OnInit {
   triggerDiscard() {
     this.onDiscard()
   }
-
 }

@@ -10,6 +10,7 @@ export enum actionTypes {
   DELETE_NOTE = '[Note] DELETE_NOTE',
   EDIT_NOTE_START = '[Note] EDIT_NOTE_START',
   EDIT_NOTE_STOP = '[Note] EDIT_NOTE_STOP',
+  SUCCESSFUL = '[Note] SUCCESSFUL',
 }
 
 export class GetNotes implements Action {
@@ -41,6 +42,10 @@ export class DeleteNote implements Action {
   readonly type = actionTypes.DELETE_NOTE;
   constructor(public noteId: string) {}
 }
+export class Successful implements Action {
+  readonly type = actionTypes.SUCCESSFUL;
+  constructor(public message: string) {}
+}
 export type Actions = 
 GetNotes
 | SyncNotes
@@ -50,4 +55,5 @@ GetNotes
 | DeleteNote
 | EditNoteStart
 | EditNoteStop
+| Successful
 ;

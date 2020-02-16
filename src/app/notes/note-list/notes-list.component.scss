@@ -1,0 +1,48 @@
+/** SECTION Variables */
+@import "../../shared/styles/variables.scss";
+
+::ng-deep .highlight {
+  background-color: yellow !important;
+}
+
+.collection {
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem;
+  border: none;
+}
+
+.collection-item {
+  @media screen and (max-width: 500px) {
+    margin-bottom: 1rem;
+  }
+
+  border-top: 5px solid rgba($primary-color, 1);
+  cursor: pointer;
+  user-select: none;
+  background-color: rgba(60, 60, 60, 0.85);
+  color: rgba(255, 255, 255, 1);
+  // box-shadow: 3px 1px 5px rgba($primary-color, 0.5);
+  .title,
+  i {
+    color: $primary-color;
+  }
+  
+  }
+  .btn-floating {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border: solid 2px rgba($primary-color, 1);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0);
+    margin: 2px;
+  }
+  .btn-floating:hover {
+    background: rgba($primary-color, 0.6);
+  }

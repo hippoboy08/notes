@@ -8,6 +8,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NotesRoutingModule } from './notes-routing.module';
 import { NoteStartComponent } from './note-start/note-start.component';
 import { FilterPipe } from '../shared/pipes/filter.pipe';
+import { HighlightPipe } from '../shared/pipes/highlight.pipe';
+import { SharedModule } from '../shared/shared.module';
+import { NotePreviewComponent } from './note-preview/note-preview.component';
 
 @NgModule({
   declarations: [
@@ -15,13 +18,16 @@ import { FilterPipe } from '../shared/pipes/filter.pipe';
     NoteEditComponent,
     NavBarComponent,
     NoteStartComponent,
-    FilterPipe
+    FilterPipe,
+    HighlightPipe,
+    NotePreviewComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NotesRoutingModule
+    NotesRoutingModule,
+    SharedModule
   ],
 })
 export class NotesModule { }

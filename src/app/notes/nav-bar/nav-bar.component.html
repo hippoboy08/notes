@@ -8,7 +8,10 @@
         <ul class="right hide-on-med-and-down">
           <li><a><i class="material-icons left" (click)="addNote()">add</i></a></li>
           <li>
-            <a><i class="material-icons right" (click)="logout()">account_circle</i></a>
+            <a appTooltips [tooltipsText]="'Profile'" [routerLink]="['/profile']"><i class="material-icons right" >account_circle</i></a>
+          </li>
+          <li>
+            <a appTooltips [tooltipsText]="'Logout'"><i class="material-icons right" (click)="logout()">exit_to_app</i></a>
           </li>
         </ul>
       </div>

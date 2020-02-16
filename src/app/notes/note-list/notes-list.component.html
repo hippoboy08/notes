@@ -1,31 +1,40 @@
-<div>
+<app-loading *ngIf="isLoading"></app-loading>
+<div *ngIf="!isLoading">
   <app-nav-bar (newNote)="addNote()"></app-nav-bar>
   <!-- <app-note-edit *ngIf="isEditing" (save)="onSave()" (discard)="onDiscard()"></app-note-edit> -->
   <div class="row">
     <div class="input-field col l12">
       <i class="material-icons prefix">search</i>
-      <input id="search" [(ngModel)]="filterInput" type="text" class="" placeholder="Search...">
+      <input id="search" [(ngModel)]="filterInput" type="text" class="" placeholder="Type to search...">
     </div>
   </div>
-  <router-outlet></router-outlet>
-  <ul class="collection" *ngFor="let note of notes | filter :filterInput :'content'">
-    <li class="collection-item row">
-      <div class="col l10">
-        <div class="row">
-          <span class="title">Created on {{note.createdDate | date :'dd MMM'}}</span>
+
+  <!-- Notes List -->
+  <ul class="collection">
+    <div *ngFor="let note of notes | filter :filterInput :'content'">
+      <li class="collection-item" (dblclick)="editNote(note.id)">
+        <div class="col l10">
+          <div class="row">
+            <span class="title">Created on {{note.createdDate | date :'dd MMM'}}</span>
+          </div>
+          <div class="row" *ngIf="note.user != getUser()">
+            <span class="title">By {{ note.userName()}}</span>
+          </div>
+          <app-note-preview [content]="renderPreview(note.content)"></app-note-preview>
         </div>
-        <p>Content: {{note.content}}</p>
-      </div>
-      <div class="col l2">
-        <a class="btn-floating red" [routerLink]="[note.id]">
-          <i class="material-icons">mode_edit</i>
-        </a>
-        <a class="btn-floating red" (click)="onDelete(note.id)">
-          <i class="material-icons">delete</i>
-        </a>
-      </div>
-    </li>
+        <div class="col l2" *ngIf="note.user == getUser()">
+          <!-- <a class="btn-floating" [routerLink]="[note.id]">
+            <i class="material-icons">mode_edit</i>
+          </a> -->
+          <a class="btn-floating" (click)="isConfirmed = false;">
+            <i class="material-icons">delete</i>
+          </a>
+          <app-alert *ngIf="!isConfirmed" [enableCheck]="true" (check)="onDelete(note.id)" (close)="isConfirmed = true;"
+            [title]="'Wait!'" [message]="'Permanently remove this note?'"></app-alert>
+        </div>
+      </li>
+    </div>
   </ul>
-  <button class="btn" (click)="saveData()">Save</button>
-  <button class="btn" (click)="findData()">Load</button>
+  <!-- <button class="btn" (click)="saveData()">Save</button>
+  <button class="btn" (click)="findData()">Load</button> -->
 </div>

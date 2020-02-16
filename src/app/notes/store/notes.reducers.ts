@@ -5,26 +5,37 @@ import { Note } from 'src/app/shared/models/note.model';
 export interface State {
   notes: Note[];
   isEditing: boolean;
+  isLoading: boolean;
+  message: string;
 }
 
 const initialState: State = {
   notes: [],
-  isEditing: false
+  isEditing: false,
+  isLoading: false,
+  message: null
 }
 
 export function reducer(state = initialState, action: NotesActions.Actions ): State {
   switch (action.type) {
+    case NotesActions.actionTypes.GET_NOTES: {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }
     case NotesActions.actionTypes.SYNC_NOTES: {
       // console.log(action.payload.notes)
       return {
         ...state,
+        isLoading: false,
         notes: action.payload.notes
       };
     }
-    case NotesActions.actionTypes.ADD_NOTE: {
+    case NotesActions.actionTypes.SUCCESSFUL: {
       return {
         ...state,
-        notes: [...state.notes, action.note],
+        message: action.message
       };
     }
     // case NotesActions.actionTypes.UPDATE_NOTE: {
